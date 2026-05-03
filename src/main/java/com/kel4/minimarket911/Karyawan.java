@@ -1,3 +1,5 @@
+package com.kel4.minimarket911;
+
 public abstract class Karyawan extends Person {
     private String jabatan;
     private double gajiMurni;

@@ -1,3 +1,5 @@
+package com.kel4.minimarket911;
+
 public abstract class  Person {
     private String id;
     private String nama;

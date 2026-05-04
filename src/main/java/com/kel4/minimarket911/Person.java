@@ -17,26 +17,24 @@ public abstract class  Person {
         return id;
     }
 
-    public boolean setId(String id) {
+    public void setId(String id) {
         if (id == null || id.trim().isEmpty()) {
             System.out.println("ID tidak boleh kosong");
-            return false;
+            return;
         }
         this.id = id;
-        return true;
     }
 
     public String getNama() {
         return nama;
     }
 
-    public boolean setNama(String nama) {
+    public void setNama(String nama) {
         if (nama == null || nama.trim().isEmpty()) {
             System.out.println("Nama tidak boleh kosong");
-            return false;
+            return;
         }
         this.nama = nama;
-        return true;
     }
 
     public String getTelepon() {

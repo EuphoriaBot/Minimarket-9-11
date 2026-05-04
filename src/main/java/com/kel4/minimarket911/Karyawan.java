@@ -18,10 +18,6 @@ public abstract class Karyawan extends Person {
     }
 
     public boolean setJabatan(String jabatan) {
-        if (jabatan == null || jabatan.trim().isEmpty()) {
-            System.out.println("Gopnik Bear");
-            return false;
-        }
         this.jabatan = jabatan;
         return true;
     }
@@ -30,13 +26,12 @@ public abstract class Karyawan extends Person {
         return gajiMurni;
     }
 
-    public boolean setGajiMurni(double gajiMurni) {
+    public void setGajiMurni(double gajiMurni) {
         if (gajiMurni < 0) {
-            System.out.println("Gaji tidak boleh negatif");
-            return false;
+            System.out.println("Gaji harus lebih dari 0 tuan");
+            return;
         }
         this.gajiMurni = gajiMurni;
-        return true;
     }
 
     public String getShift() {
@@ -44,10 +39,6 @@ public abstract class Karyawan extends Person {
     }
 
     public boolean setShift(String shift) {
-        if (shift == null || shift.trim().isEmpty()) {
-            System.out.println("Shift tidak boleh kosong");
-            return false;
-        }
         this.shift = shift;
         return true;
     }

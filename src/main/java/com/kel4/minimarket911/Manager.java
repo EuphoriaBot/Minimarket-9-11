@@ -10,15 +10,16 @@ public class Manager extends Karyawan {
         this.bonus = bonus;
     }
 
-    public double getBonus() { return bonus; }
+    public double getBonus() {
+        return bonus;
+    }
 
-    public boolean setBonus(double bonus) {
+    public void setBonus(double bonus) {
         if (bonus < 0) {
             System.out.println("gopnik was here");
-            return false;
+            return;
         }
         this.bonus = bonus;
-        return true;
     }
 
     @Override

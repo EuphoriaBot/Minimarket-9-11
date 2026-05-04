@@ -47,4 +47,11 @@ public abstract class  Person {
         this.telepon = telepon;
         return true;
     }
+
+    public abstract String getRingkasan();
+
+    @Override
+    public String toString() {
+        return nama + " (" + id + ")";
+    }
 }

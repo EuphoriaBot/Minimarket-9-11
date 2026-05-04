@@ -51,4 +51,11 @@ public abstract class Karyawan extends Person {
         this.shift = shift;
         return true;
     }
+
+    public abstract double hitungGaji();
+
+    @Override
+    public String getRingkasan() {
+        return getNama() + " | " + jabatan + " | Gaji: Rp " + String.format("%,.0f", hitungGaji());
+    }
 }

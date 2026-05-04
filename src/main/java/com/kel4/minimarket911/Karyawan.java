@@ -56,6 +56,6 @@ public abstract class Karyawan extends Person {
 
     @Override
     public String getRingkasan() {
-        return getNama() + " | " + jabatan + " | Gaji: Rp " + String.format("%,.0f", hitungGaji());
+        return getNama() + " " + jabatan + "Gaji: Rp " + String.format("%,.0f", hitungGaji());
     }
 }

@@ -8,10 +8,12 @@ public class Kasir extends Karyawan {
         super(id, nama, telepon, "Kasir", gajiMurni, shift);
     }
 
+    @Override
     public double hitungGaji() {
         return getGajiMurni();
     }
 
+    @Override
     public String getRingkasan() {
         return getNama() + "Kasir, Shift: " + getShift() + "Gaji: Rp " + String.format("%,.0f", hitungGaji());
     }

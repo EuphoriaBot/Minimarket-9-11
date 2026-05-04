@@ -52,6 +52,6 @@ public abstract class  Person {
 
     @Override
     public String toString() {
-        return nama + " (" + id + ")";
+        return nama + "(" + id + ")";
     }
 }

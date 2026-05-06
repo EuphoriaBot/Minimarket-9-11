@@ -32,9 +32,4 @@ public class Supplier extends Person {
     public String getRingkasan() {
         return namaPerusahaan + "Kota: " + kota + "glop: " + getNama();
     }
-
-    @Override
-    public String toString() {
-        return namaPerusahaan;
-    }
 }

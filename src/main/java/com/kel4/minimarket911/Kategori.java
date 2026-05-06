@@ -36,9 +36,4 @@ public class Kategori {
     public void setDeskripsi(String deskripsi) {
         this.deskripsi = deskripsi;
     }
-
-    @Override
-    public String toString() {
-        return nama;
-    }
 }

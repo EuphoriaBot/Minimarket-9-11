@@ -2,31 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.kel4.minimarket911.menu;
-
-import java.awt.BorderLayout;
+package com.kel4.minimarket911.auth;
 
 /**
  *
- * @author Acer
+ * @author VECTOR
  */
-public class MainMenu extends javax.swing.JFrame {
+public class LoginFormTest extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainMenu.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginFormTest.class.getName());
 
     /**
-     * Creates new form MainMenu
+     * Creates new form LoginFormTest
      */
-    public MainMenu() {
+    public LoginFormTest() {
         initComponents();
-        remove(panelSidebar);
-        
-        Sidebar panelSidebar = new Sidebar();
-        add(panelSidebar, BorderLayout.WEST);
-        
-        revalidate();
-        repaint();
-        
     }
 
     /**
@@ -38,13 +28,18 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelSidebar = new com.kel4.minimarket911.menu.PlaceholderSidebar();
-        panelContent = new com.kel4.minimarket911.menu.PlaceholderContent();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
-        getContentPane().add(panelSidebar, java.awt.BorderLayout.WEST);
-        getContentPane().add(panelContent, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -71,11 +66,9 @@ public class MainMenu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainMenu().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new LoginFormTest().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.kel4.minimarket911.menu.PlaceholderContent panelContent;
-    private com.kel4.minimarket911.menu.PlaceholderSidebar panelSidebar;
     // End of variables declaration//GEN-END:variables
 }

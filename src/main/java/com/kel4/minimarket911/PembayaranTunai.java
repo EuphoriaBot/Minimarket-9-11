@@ -40,11 +40,6 @@ public class PembayaranTunai extends Pembayaran {
 
     @Override
     public String getDetailPembayaran() {
-        return "Tunai, Total: Rp " +
-                String.format("%,.0f", totalTagihan) +
-                "Dibayar: Rp " +
-                String.format("%,.0f", uangDiberikan) +
-                "Kembalian: Rp " +
-                String.format("%,.0f", kembalian);
+        return "Tunai, Total: Rp " + String.format("%,.0f", totalTagihan) + "Dibayar: Rp " + String.format("%,.0f", uangDiberikan) + "Kembalian: Rp " + String.format("%,.0f", kembalian);
     }
 }

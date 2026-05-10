@@ -107,11 +107,11 @@ public class Produk {
 
     public String getStatusStok() {
         if (stok == 0) {
-            return "Habis Bosss";
+            return "Habis";
         } else if (stok <= stokMinimum) {
-            return "Mulai Menipis Boss";
+            return "Mulai Menipis";
         } else {
-            return "Aman Boss";
+            return "Aman aja";
         }
     }
 

@@ -46,9 +46,9 @@ public class Pelanggan extends Person {
 
     private void updateLevel() {
         if (totalBelanja >= 2000000) {
-            level = "Level 999 God";
+            level = "Gold";
         } else if (totalBelanja >= 500000) {
-            level = "Level 99 Mafia Boss";
+            level = "Silver";
         } else {
             level = "Reguler";
         }

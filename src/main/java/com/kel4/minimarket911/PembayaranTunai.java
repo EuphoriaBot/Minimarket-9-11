@@ -34,7 +34,9 @@ public class PembayaranTunai extends Pembayaran {
     }
 
     @Override
-    public String getMetode() { return "Tunai"; }
+    public String getMetode() {
+        return "Tunai";
+    }
 
     @Override
     public String getDetailPembayaran() {

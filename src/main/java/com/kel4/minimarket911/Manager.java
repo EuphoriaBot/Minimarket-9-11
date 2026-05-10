@@ -6,7 +6,7 @@ public class Manager extends Karyawan {
     public Manager() {}
 
     public Manager(String id, String nama, String telepon, double gajiMurni, double bonus) {
-        super(id, nama, telepon, "Manager", gajiMurni, "Gopnik");
+        super(id, nama, telepon, "Manager", gajiMurni, "-");
         this.bonus = bonus;
     }
 
@@ -16,7 +16,7 @@ public class Manager extends Karyawan {
 
     public void setBonus(double bonus) {
         if (bonus < 0) {
-            System.out.println("gopnik was here");
+            System.out.println("Bonus gk blh negatif");
             return;
         }
         this.bonus = bonus;

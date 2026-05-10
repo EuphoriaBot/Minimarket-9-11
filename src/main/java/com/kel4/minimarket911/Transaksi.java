@@ -15,7 +15,6 @@ public class Transaksi {
     private double totalDiskon;
     private double totalAkhir;
 
-
     public Transaksi(String idTransaksi, Kasir kasir, Pelanggan pelanggan) {
         this.idTransaksi = idTransaksi;
         this.kasir = kasir;
@@ -23,7 +22,6 @@ public class Transaksi {
         this.waktu = LocalDateTime.now();
         this.items = new ArrayList<>();
     }
-
 
     public void tambahItem(Produk produk, int kuantitas) {
         for (ItemBelanja item : items) {

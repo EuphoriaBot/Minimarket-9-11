@@ -26,5 +26,5 @@ public abstract class Pembayaran {
 
     public abstract String getMetode();
 
-    public abstract String getDetailPembayaran(); // tetap dipertahankan dari punya kamu
+    public abstract String getDetailPembayaran();
 }

@@ -11,7 +11,7 @@ public class Pelanggan extends Person {
         super(id, nama, telepon);
         this.poin = 0;
         this.totalBelanja = 0;
-        this.level = "Level 1 Crook";
+        this.level = "Reguler";
     }
 
     public int getPoin() {

@@ -30,6 +30,6 @@ public class Supplier extends Person {
 
     @Override
     public String getRingkasan() {
-        return namaPerusahaan + "Kota: " + kota + "glop: " + getNama();
+        return namaPerusahaan + "Kota: " + kota + "Kontak: " + getNama();
     }
 }

@@ -28,7 +28,7 @@ public abstract class Karyawan extends Person {
 
     public void setGajiMurni(double gajiMurni) {
         if (gajiMurni < 0) {
-            System.out.println("Gaji harus lebih dari 0 tuan");
+            System.out.println("Gaji harus lebih dari 0");
             return;
         }
         this.gajiMurni = gajiMurni;

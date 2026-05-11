@@ -1,30 +1,33 @@
 package com.kel4.minimarket911;
 
-public abstract class Pembayaran {
-    protected double jumlahBayar;
-    protected double totalTagihan;
+public class Pembayaran {
+    private double totalTagihan;
+    private double uangDiberikan;
+    private double kembalian;
 
-    public Pembayaran() {}
-
-    public Pembayaran(double totalTagihan) {
+    public Pembayaran(double totalTagihan, double uangDiberikan) {
         this.totalTagihan = totalTagihan;
-    }
-
-    public double getJumlahBayar() {
-        return jumlahBayar;
+        this.uangDiberikan = uangDiberikan;
+        this.kembalian = uangDiberikan - totalTagihan;
     }
 
     public double getTotalTagihan() {
         return totalTagihan;
     }
 
-    public void setTotalTagihan(double totalTagihan) {
-        this.totalTagihan = totalTagihan;
+    public double getUangDiberikan() {
+        return uangDiberikan;
     }
 
-    public abstract boolean proses(double nominal);
+    public double getKembalian() {
+        return kembalian;
+    }
 
-    public abstract String getMetode();
+    public boolean isValid() {
+        return uangDiberikan >= totalTagihan;
+    }
 
-    public abstract String getDetailPembayaran();
+    public String getDetailPembayaran() {
+        return "Tunai | Total: Rp " + String.format("%,.0f", totalTagihan) + " | Dibayar: Rp " + String.format("%,.0f", uangDiberikan) + " | Kembalian: Rp " + String.format("%,.0f", kembalian);
+    }
 }

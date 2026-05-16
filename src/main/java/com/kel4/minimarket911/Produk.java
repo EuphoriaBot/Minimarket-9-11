@@ -25,96 +25,85 @@ public class Produk {
         return kode;
     }
 
-    public void setKode(String kode) {
-        this.kode = kode;
-    }
-
     public String getNama() {
         return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
     }
 
     public Kategori getKategori() {
         return kategori;
     }
 
-    public void setKategori(Kategori kategori) {
-        this.kategori = kategori;
-    }
-
     public double getHargaBeli() {
         return hargaBeli;
-    }
-
-    public void setHargaBeli(double hargaBeli) {
-        if (hargaBeli < 0) {
-            System.out.println("Harga jangan negatif");
-            return;
-        }
-        this.hargaBeli = hargaBeli;
     }
 
     public double getHargaJual() {
         return hargaJual;
     }
 
-    public void setHargaJual(double hargaJual) {
-        if (hargaJual < 0) {
-            System.out.println("Harga jgn negatif");
-            return;
-        }
-        this.hargaJual = hargaJual;
-    }
-
     public int getStok() {
         return stok;
-    }
-
-    public void setStok(int stok) {
-        if (stok < 0) {
-            System.out.println("Stok jgn mines");
-            return;
-        }
-        this.stok = stok;
     }
 
     public int getStokMinimum() {
         return stokMinimum;
     }
 
+    public void setKode(String kode) {
+        this.kode = kode;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public void setKategori(Kategori kategori) {
+        this.kategori = kategori;
+    }
+
+    public void setHargaBeli(double hargaBeli) {
+        if (hargaBeli < 0) {
+            System.out.println("Harga beli tidak boleh negatif");
+            return;
+        }
+        this.hargaBeli = hargaBeli;
+    }
+    public void setHargaJual(double hargaJual) {
+        if (hargaJual < 0) {
+            System.out.println("Harga jual tidak boleh negatif");
+            return;
+        }
+        this.hargaJual = hargaJual;
+    }
+    public void setStok(int stok) {
+        if (stok < 0) {
+            System.out.println("Stok tidak boleh negatif");
+            return;
+        }
+        this.stok = stok;
+    }
     public void setStokMinimum(int stokMinimum) {
         this.stokMinimum = stokMinimum;
     }
 
     public void tambahStok(int jumlah) {
-        if (jumlah <= 0) {
-            System.out.println("jml hrs lbh dr 0");
-            return;
-        }
         this.stok += jumlah;
     }
 
     public void kurangiStok(int jumlah) {
         if (jumlah > stok) {
-            System.out.println("Stok tdk ckp");
+            System.out.println("Stok tidak mencukupi");
             return;
         }
         this.stok -= jumlah;
     }
 
     public String getStatusStok() {
-        if (stok == 0) {
-            return "Habis";
-        } else if (stok <= stokMinimum) {
-            return "Mulai Menipis";
-        } else {
-            return "Aman aja";
-        }
+        if (stok == 0) return "Habis";
+        if (stok <= stokMinimum) return "Menipis";
+        return "Aman";
     }
 
     @Override
-    public String toString() { return kode + " " + nama; }
+    public String toString() { return kode + " - " + nama; }
 }

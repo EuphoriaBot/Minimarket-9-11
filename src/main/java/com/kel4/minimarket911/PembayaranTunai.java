@@ -1,11 +1,11 @@
 package com.kel4.minimarket911;
 
-public class Pembayaran {
+public class PembayaranTunai {
     private double totalTagihan;
     private double uangDiberikan;
     private double kembalian;
 
-    public Pembayaran(double totalTagihan, double uangDiberikan) {
+    public PembayaranTunai(double totalTagihan, double uangDiberikan) {
         this.totalTagihan = totalTagihan;
         this.uangDiberikan = uangDiberikan;
         this.kembalian = uangDiberikan - totalTagihan;

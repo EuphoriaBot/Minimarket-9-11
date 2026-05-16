@@ -1,64 +1,54 @@
 package com.kel4.minimarket911;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Transaksi {
     private String idTransaksi;
     private LocalDateTime waktu;
     private Kasir kasir;
-    private Pelanggan pelanggan;
-    private ArrayList<ItemBelanja> items;
-    private Diskon diskon;
-    private Pembayaran pembayaran;
-    private double totalSebelumDiskon;
-    private double totalDiskon;
-    private double totalAkhir;
+    private ArrayList<ItemBelanja> daftarItem;
+    private PembayaranTunai pembayaran;
+    private double totalHarga;
 
-    public Transaksi(String idTransaksi, Kasir kasir, Pelanggan pelanggan) {
+    public Transaksi() {
+        this.daftarItem = new ArrayList<>();
+        this.waktu = LocalDateTime.now();
+    }
+
+    public Transaksi(String idTransaksi, Kasir kasir) {
         this.idTransaksi = idTransaksi;
         this.kasir = kasir;
-        this.pelanggan = pelanggan;
         this.waktu = LocalDateTime.now();
-        this.items = new ArrayList<>();
+        this.daftarItem = new ArrayList<>();
     }
 
     public void tambahItem(Produk produk, int kuantitas) {
-        for (ItemBelanja item : items) {
+        for (ItemBelanja item : daftarItem) {
             if (item.getProduk().getKode().equals(produk.getKode())) {
                 item.setKuantitas(item.getKuantitas() + kuantitas);
                 hitungTotal();
                 return;
             }
         }
-        items.add(new ItemBelanja(produk, kuantitas));
+        daftarItem.add(new ItemBelanja(produk, kuantitas));
         hitungTotal();
     }
 
     public void hapusItem(int index) {
-        items.remove(index);
+        daftarItem.remove(index);
         hitungTotal();
     }
 
     private void hitungTotal() {
-        totalSebelumDiskon = 0;
-        for (ItemBelanja item : items) {
-            totalSebelumDiskon += item.getSubtotal();
+        totalHarga = 0;
+        for (ItemBelanja item : daftarItem) {
+            totalHarga += item.getSubtotal();
         }
-        if (diskon != null) {
-            totalDiskon = diskon.hitungDiskon(totalSebelumDiskon);
-        } else {
-            totalDiskon = 0;
-        }
-        totalAkhir = totalSebelumDiskon - totalDiskon;
     }
 
-    public void setDiskon(Diskon diskon) {
-        this.diskon = diskon;
-        hitungTotal();
-    }
-
-    public void setPembayaran(Pembayaran pembayaran) {
+    public void setPembayaran(PembayaranTunai pembayaran) {
         this.pembayaran = pembayaran;
     }
 
@@ -74,35 +64,27 @@ public class Transaksi {
         return kasir;
     }
 
-    public Pelanggan getPelanggan() {
-        return pelanggan;
+    public ArrayList<ItemBelanja> getDaftarItem() {
+        return daftarItem;
     }
 
-    public ArrayList<ItemBelanja> getItems() {
-        return items;
-    }
-
-    public Diskon getDiskon() {
-        return diskon;
-    }
-
-    public Pembayaran getPembayaran() {
+    public PembayaranTunai getPembayaran() {
         return pembayaran;
     }
 
-    public double getTotalSebelumDiskon() {
-        return totalSebelumDiskon;
+    public double getTotalHarga() {
+        return totalHarga;
     }
 
-    public double getTotalDiskon() {
-        return totalDiskon;
+    public void setIdTransaksi(String idTransaksi) {
+        this.idTransaksi = idTransaksi;
     }
 
-    public double getTotalAkhir() {
-        return totalAkhir;
+    public void setKasir(Kasir kasir) {
+        this.kasir = kasir;
     }
 
     public String getWaktuFormatted() {
-        return waktu.toString();
+        return waktu.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 }

@@ -16,12 +16,12 @@ public class Supplier extends Person {
         return namaPerusahaan;
     }
 
-    public void setNamaPerusahaan(String namaPerusahaan) {
-        this.namaPerusahaan = namaPerusahaan;
-    }
-
     public String getKota() {
         return kota;
+    }
+
+    public void setNamaPerusahaan(String namaPerusahaan) {
+        this.namaPerusahaan = namaPerusahaan;
     }
 
     public void setKota(String kota) {
@@ -30,6 +30,11 @@ public class Supplier extends Person {
 
     @Override
     public String getRingkasan() {
-        return namaPerusahaan + "Kota: " + kota + "Kontak: " + getNama();
+        return namaPerusahaan + " | Kota: " + kota + " | Kontak: " + getNama();
+    }
+
+    @Override
+    public String toString() {
+        return namaPerusahaan;
     }
 }

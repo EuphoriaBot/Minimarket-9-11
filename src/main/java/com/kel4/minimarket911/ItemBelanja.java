@@ -15,7 +15,6 @@ public class ItemBelanja {
 
     public int getKuantitas() {
         return kuantitas;
-
     }
     public void setKuantitas(int kuantitas) {
         this.kuantitas = kuantitas;

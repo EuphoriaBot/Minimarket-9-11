@@ -4,17 +4,17 @@ public class Kasir extends Karyawan {
 
     public Kasir() {}
 
-    public Kasir(String id, String nama, String telepon, double gajiMurni, String shift) {
-        super(id, nama, telepon, "Kasir", gajiMurni, shift);
+    public Kasir(String id, String nama, String telepon, double gajiBasis, String shift) {
+        super(id, nama, telepon, "Kasir", gajiBasis, shift);
     }
 
     @Override
     public double hitungGaji() {
-        return getGajiMurni();
+        return getGajiBasis();
     }
 
     @Override
     public String getRingkasan() {
-        return getNama() + "Kasir, Shift: " + getShift() + "Gaji: Rp " + String.format("%,.0f", hitungGaji());
+        return getNama() + " | Kasir | Shift: " + getShift() + " | Gaji: Rp " + String.format("%,.0f", hitungGaji());
     }
 }

@@ -10,6 +10,11 @@ public class TransaksiPembelian {
     private ArrayList<ItemPembelian> items;
     private double totalHarga;
 
+    public TransaksiPembelian() {
+        this.items = new ArrayList<>();
+        this.tanggal = LocalDate.now();
+    }
+
     public TransaksiPembelian(String idPembelian, Supplier supplier) {
         this.idPembelian = idPembelian;
         this.supplier = supplier;
@@ -47,5 +52,13 @@ public class TransaksiPembelian {
 
     public double getTotalHarga() {
         return totalHarga;
+    }
+
+    public void setIdPembelian(String idPembelian) {
+        this.idPembelian = idPembelian;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 }

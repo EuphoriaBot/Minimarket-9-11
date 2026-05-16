@@ -1,6 +1,6 @@
 package com.kel4.minimarket911;
 
-public abstract class  Person {
+public abstract class Person {
     private String id;
     private String nama;
     private String telepon;
@@ -17,16 +17,20 @@ public abstract class  Person {
         return id;
     }
 
+    public String getNama() {
+        return nama;
+    }
+
+    public String getTelepon() {
+        return telepon;
+    }
+
     public void setId(String id) {
         if (id == null || id.trim().isEmpty()) {
             System.out.println("ID tidak boleh kosong");
             return;
         }
         this.id = id;
-    }
-
-    public String getNama() {
-        return nama;
     }
 
     public void setNama(String nama) {
@@ -37,19 +41,14 @@ public abstract class  Person {
         this.nama = nama;
     }
 
-    public String getTelepon() {
-        return telepon;
-    }
-
-    public boolean setTelepon(String telepon) {
+    public void setTelepon(String telepon) {
         this.telepon = telepon;
-        return true;
     }
 
     public abstract String getRingkasan();
 
     @Override
     public String toString() {
-        return nama + "(" + id + ")";
+        return nama + " (" + id + ")";
     }
 }

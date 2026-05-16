@@ -23,6 +23,14 @@ public class ItemPembelian {
         return hargaBeli;
     }
 
+    public void setKuantitas(int kuantitas) {
+        this.kuantitas = kuantitas;
+    }
+
+    public void setHargaBeli(double hargaBeli) {
+        this.hargaBeli = hargaBeli;
+    }
+
     public double getSubtotal() {
         return hargaBeli * kuantitas;
     }

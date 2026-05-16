@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2026 at 09:42 AM
+-- Generation Time: May 16, 2026 at 03:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,6 +31,7 @@ CREATE TABLE `tbdetail_transaksi` (
   `id_detail_transaksi` varchar(16) NOT NULL,
   `id_transaksi` varchar(16) NOT NULL,
   `id_produk` varchar(16) NOT NULL,
+  `harga_jual` decimal(15,2) NOT NULL,
   `kuantitas` int(8) NOT NULL,
   `subtotal_transaksi` decimal(15,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -39,11 +40,11 @@ CREATE TABLE `tbdetail_transaksi` (
 -- Dumping data for table `tbdetail_transaksi`
 --
 
-INSERT INTO `tbdetail_transaksi` (`id_detail_transaksi`, `id_transaksi`, `id_produk`, `kuantitas`, `subtotal_transaksi`) VALUES
-('DT001', 'TR001', 'PR001', 20, 30000.00),
-('DT002', 'TR002', 'PR002', 2, 19000.00),
-('DT003', 'TR002', 'PR004', 1, 6100.00),
-('DT004', 'TR003', 'PR003', 2, 17000.00);
+INSERT INTO `tbdetail_transaksi` (`id_detail_transaksi`, `id_transaksi`, `id_produk`, `harga_jual`, `kuantitas`, `subtotal_transaksi`) VALUES
+('DT001', 'TR001', 'PR001', 1500.00, 20, 30000.00),
+('DT002', 'TR002', 'PR002', 9500.00, 2, 19000.00),
+('DT003', 'TR002', 'PR004', 6100.00, 1, 6100.00),
+('DT004', 'TR003', 'PR003', 8500.00, 2, 17000.00);
 
 -- --------------------------------------------------------
 
@@ -90,8 +91,8 @@ CREATE TABLE `tbkaryawan` (
 --
 
 INSERT INTO `tbkaryawan` (`id_karyawan`, `nama_karyawan`, `telepon_karyawan`, `jabatan`, `gaji_murni`, `shift`, `bonus`) VALUES
-('K001', 'King DIMASS', '0804', 'Kasir', 20000.00, 'Pagi', 2000.00),
-('K002', 'HiTama', '0820', 'Kasir', 25000.00, 'Malam', 10000.00),
+('K001', 'King DIMASS', '0804', 'Kasir', 20000.00, 'Pagi', 0.00),
+('K002', 'HiTama', '0820', 'Kasir', 25000.00, 'Malam', 0.00),
 ('K003', 'so MUCH', '0813', 'Manager', 7000000.00, '-', 14000000.00);
 
 -- --------------------------------------------------------
@@ -115,30 +116,6 @@ INSERT INTO `tbkategori` (`id_kategori`, `nama_kategori`, `deskripsi_kategori`) 
 ('KT002', 'Snek', 'Ular wlee :p'),
 ('KT003', 'Minuman', 'Minuman cair'),
 ('KT004', 'Mainan anak', 'Mainan untuk anak anak');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbpelanggan`
---
-
-CREATE TABLE `tbpelanggan` (
-  `id_pelanggan` varchar(10) NOT NULL,
-  `nama_pelanggan` varchar(50) NOT NULL,
-  `telepon_pelanggan` varchar(16) NOT NULL,
-  `poin` int(10) NOT NULL,
-  `total_belanja` decimal(15,2) NOT NULL,
-  `level_pelanggan` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbpelanggan`
---
-
-INSERT INTO `tbpelanggan` (`id_pelanggan`, `nama_pelanggan`, `telepon_pelanggan`, `poin`, `total_belanja`, `level_pelanggan`) VALUES
-('P001', 'Lira', '0801', 120, 7777777.00, 'Gold'),
-('P002', 'Richont', '0802', 50, 300000.00, 'Reguler'),
-('Ped003', 'Fahri the hero', '0803', 250, 25000.00, 'Reguler');
 
 -- --------------------------------------------------------
 
@@ -189,10 +166,10 @@ CREATE TABLE `tbstock_keluar` (
 --
 
 INSERT INTO `tbstock_keluar` (`id_stock_keluar`, `id_produk`, `nama_produk`, `id_transaksi`, `tanggal_keluar`, `jumlah_keluar`, `keterangan`) VALUES
-('SK001', 'PR001', 'Indomie Bakar', 'TR001', '2026-05-14', 20, 'Penjualan pelanggan'),
-('SK002', 'PR002', 'Teh Bulat', 'TR002', '2026-05-14', 2, 'Penjualan pelanggan'),
-('SK003', 'PR003', 'Pucari', 'TR003', '2026-05-14', 2, 'Penjualan pelanggan'),
-('SK004', 'PR004', 'Pucari', 'TR002', '2026-05-14', 1, 'Penjualan pelanggan');
+('SK001', 'PR001', 'Indomie Bakar', 'TR001', '2026-05-14', 20, 'Penjualan'),
+('SK002', 'PR002', 'Chitoto rasa rusa jantan', 'TR002', '2026-05-14', 2, 'Penjualan'),
+('SK003', 'PR004', 'Teh Bulat', 'TR002', '2026-05-14', 1, 'Penjualan'),
+('SK004', 'PR003', 'Pucari', 'TR003', '2026-05-14', 2, 'Penjualan');
 
 -- --------------------------------------------------------
 
@@ -227,24 +204,19 @@ CREATE TABLE `tbtransaksi` (
   `id_transaksi` varchar(16) NOT NULL,
   `waktu_transaksi` datetime NOT NULL,
   `id_kasir` varchar(10) NOT NULL,
-  `id_pelanggan` varchar(10) DEFAULT NULL,
-  `total_sebelum_diskon` decimal(15,2) NOT NULL,
-  `total_diskon` decimal(15,2) NOT NULL,
-  `harga_akhir` decimal(15,2) NOT NULL,
-  `total_tagihan` decimal(15,2) NOT NULL,
+  `total_harga` decimal(15,2) NOT NULL,
   `uang_diberikan` decimal(15,2) NOT NULL,
-  `kembalian` decimal(15,2) NOT NULL,
-  `nama_diskon` varchar(32) DEFAULT NULL
+  `kembalian` decimal(15,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbtransaksi`
 --
 
-INSERT INTO `tbtransaksi` (`id_transaksi`, `waktu_transaksi`, `id_kasir`, `id_pelanggan`, `total_sebelum_diskon`, `total_diskon`, `harga_akhir`, `total_tagihan`, `uang_diberikan`, `kembalian`, `nama_diskon`) VALUES
-('TR001', '2026-05-14 09:00:00', 'K001', 'P001', 30000.00, 3000.00, 27000.00, 27000.00, 100000.00, 73000.00, 'Diskon Gold'),
-('TR002', '2026-05-14 10:30:00', 'K002', 'P002', 25100.00, 0.00, 25100.00, 25100.00, 30000.00, 4900.00, 'Tidak Ada'),
-('TR003', '2026-05-14 12:00:00', 'K001', 'Ped003', 17000.00, 0.00, 17000.00, 17000.00, 50000.00, 33000.00, 'Tidak Ada');
+INSERT INTO `tbtransaksi` (`id_transaksi`, `waktu_transaksi`, `id_kasir`, `total_harga`, `uang_diberikan`, `kembalian`) VALUES
+('TR001', '2026-05-14 09:00:00', 'K001', 30000.00, 50000.00, 20000.00),
+('TR002', '2026-05-14 10:30:00', 'K002', 25100.00, 30000.00, 4900.00),
+('TR003', '2026-05-14 12:00:00', 'K001', 17000.00, 20000.00, 3000.00);
 
 -- --------------------------------------------------------
 
@@ -264,7 +236,7 @@ CREATE TABLE `tbtransaksi_pembelian` (
 --
 
 INSERT INTO `tbtransaksi_pembelian` (`id_pembelian`, `tanggal_pembelian`, `id_supplier`, `total_harga_pembelian`) VALUES
-('PB001', '2026-05-10', 'SUP001', 250000.00),
+('PB001', '2026-05-10', 'SUP001', 90000.00),
 ('PB002', '2026-05-11', 'SUP002', 400000.00),
 ('PB003', '2026-05-12', 'SUP003', 300000.00);
 
@@ -300,16 +272,16 @@ INSERT INTO `tbuser` (`id_user`, `username`, `password`, `role_user`, `id_karyaw
 --
 ALTER TABLE `tbdetail_transaksi`
   ADD PRIMARY KEY (`id_detail_transaksi`),
-  ADD KEY `foreigndetail1` (`id_transaksi`),
-  ADD KEY `foreigndetail2` (`id_produk`);
+  ADD KEY `id_transaksi` (`id_transaksi`),
+  ADD KEY `id_produk` (`id_produk`);
 
 --
 -- Indexes for table `tbdetail_transaksi_pembelian`
 --
 ALTER TABLE `tbdetail_transaksi_pembelian`
   ADD PRIMARY KEY (`id_detail_pembelian`),
-  ADD KEY `ddetlpembe1` (`id_pembelian`),
-  ADD KEY `ddetlpembe2` (`id_produk`);
+  ADD KEY `id_pembelian` (`id_pembelian`),
+  ADD KEY `id_produk` (`id_produk`);
 
 --
 -- Indexes for table `tbkaryawan`
@@ -324,25 +296,19 @@ ALTER TABLE `tbkategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indexes for table `tbpelanggan`
---
-ALTER TABLE `tbpelanggan`
-  ADD PRIMARY KEY (`id_pelanggan`);
-
---
 -- Indexes for table `tbproduk`
 --
 ALTER TABLE `tbproduk`
   ADD PRIMARY KEY (`id_produk`),
-  ADD KEY `prodfor1` (`id_kategori`);
+  ADD KEY `id_kategori` (`id_kategori`);
 
 --
 -- Indexes for table `tbstock_keluar`
 --
 ALTER TABLE `tbstock_keluar`
   ADD PRIMARY KEY (`id_stock_keluar`),
-  ADD KEY `stockfor1` (`id_produk`),
-  ADD KEY `stockfor2` (`id_transaksi`);
+  ADD KEY `id_produk` (`id_produk`),
+  ADD KEY `id_transaksi` (`id_transaksi`);
 
 --
 -- Indexes for table `tbsupplier`
@@ -355,22 +321,21 @@ ALTER TABLE `tbsupplier`
 --
 ALTER TABLE `tbtransaksi`
   ADD PRIMARY KEY (`id_transaksi`),
-  ADD KEY `tranfor1` (`id_kasir`),
-  ADD KEY `tranfor2` (`id_pelanggan`);
+  ADD KEY `id_kasir` (`id_kasir`);
 
 --
 -- Indexes for table `tbtransaksi_pembelian`
 --
 ALTER TABLE `tbtransaksi_pembelian`
   ADD PRIMARY KEY (`id_pembelian`),
-  ADD KEY `tranpemfor1` (`id_supplier`);
+  ADD KEY `id_supplier` (`id_supplier`);
 
 --
 -- Indexes for table `tbuser`
 --
 ALTER TABLE `tbuser`
   ADD PRIMARY KEY (`id_user`),
-  ADD KEY `userfor1` (`id_karyawan`);
+  ADD KEY `id_karyawan` (`id_karyawan`);
 
 --
 -- Constraints for dumped tables
@@ -380,47 +345,46 @@ ALTER TABLE `tbuser`
 -- Constraints for table `tbdetail_transaksi`
 --
 ALTER TABLE `tbdetail_transaksi`
-  ADD CONSTRAINT `foreigndetail1` FOREIGN KEY (`id_transaksi`) REFERENCES `tbtransaksi` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `foreigndetail2` FOREIGN KEY (`id_produk`) REFERENCES `tbproduk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbdetail_transaksi_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `tbtransaksi` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbdetail_transaksi_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `tbproduk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbdetail_transaksi_pembelian`
 --
 ALTER TABLE `tbdetail_transaksi_pembelian`
-  ADD CONSTRAINT `ddetlpembe1` FOREIGN KEY (`id_pembelian`) REFERENCES `tbtransaksi_pembelian` (`id_pembelian`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ddetlpembe2` FOREIGN KEY (`id_produk`) REFERENCES `tbproduk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbdetail_transaksi_pembelian_ibfk_1` FOREIGN KEY (`id_pembelian`) REFERENCES `tbtransaksi_pembelian` (`id_pembelian`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbdetail_transaksi_pembelian_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `tbproduk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbproduk`
 --
 ALTER TABLE `tbproduk`
-  ADD CONSTRAINT `prodfor1` FOREIGN KEY (`id_kategori`) REFERENCES `tbkategori` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbproduk_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `tbkategori` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbstock_keluar`
 --
 ALTER TABLE `tbstock_keluar`
-  ADD CONSTRAINT `stockfor1` FOREIGN KEY (`id_produk`) REFERENCES `tbproduk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `stockfor2` FOREIGN KEY (`id_transaksi`) REFERENCES `tbtransaksi` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbstock_keluar_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `tbproduk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbstock_keluar_ibfk_2` FOREIGN KEY (`id_transaksi`) REFERENCES `tbtransaksi` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbtransaksi`
 --
 ALTER TABLE `tbtransaksi`
-  ADD CONSTRAINT `tranfor1` FOREIGN KEY (`id_kasir`) REFERENCES `tbkaryawan` (`id_karyawan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tranfor2` FOREIGN KEY (`id_pelanggan`) REFERENCES `tbpelanggan` (`id_pelanggan`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbtransaksi_ibfk_1` FOREIGN KEY (`id_kasir`) REFERENCES `tbkaryawan` (`id_karyawan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbtransaksi_pembelian`
 --
 ALTER TABLE `tbtransaksi_pembelian`
-  ADD CONSTRAINT `tranpemfor1` FOREIGN KEY (`id_supplier`) REFERENCES `tbsupplier` (`id_supplier`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbtransaksi_pembelian_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `tbsupplier` (`id_supplier`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbuser`
 --
 ALTER TABLE `tbuser`
-  ADD CONSTRAINT `userfor1` FOREIGN KEY (`id_karyawan`) REFERENCES `tbkaryawan` (`id_karyawan`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbuser_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `tbkaryawan` (`id_karyawan`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

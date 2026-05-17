@@ -51,8 +51,7 @@ public class SupplierDAO {
     }
 
     public boolean updateSupplier(Supplier s) {
-        String sql = "UPDATE tbsupplier SET nama_supplier=?, telepon_supplier=?, " +
-                "nama_perusahaan=?, kota_supplier=? WHERE id_supplier=?";
+        String sql = "UPDATE tbsupplier SET nama_supplier=?, telepon_supplier=?, " + "nama_perusahaan=?, kota_supplier=? WHERE id_supplier=?";
         try {
             Connection conn = Koneksi.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);

@@ -53,8 +53,7 @@ public class KaryawanDAO {
     }
 
     public boolean updateKaryawan(Karyawan k) {
-        String sql = "UPDATE tbkaryawan SET nama_karyawan=?, telepon_karyawan=?, " +
-                "jabatan=?, gaji_murni=?, shift=?, bonus=? WHERE id_karyawan=?";
+        String sql = "UPDATE tbkaryawan SET nama_karyawan=?, telepon_karyawan=?, " + "jabatan=?, gaji_murni=?, shift=?, bonus=? WHERE id_karyawan=?";
         try {
             Connection conn = Koneksi.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);

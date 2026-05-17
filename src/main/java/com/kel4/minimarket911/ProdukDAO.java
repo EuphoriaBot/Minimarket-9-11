@@ -8,9 +8,7 @@ public class ProdukDAO {
 
     public ArrayList<Produk> getAllProduk() {
         ArrayList<Produk> list = new ArrayList<>();
-        String sql = "SELECT p.*, k.nama_kategori, k.deskripsi_kategori " +
-                "FROM tbproduk p LEFT JOIN tbkategori k ON p.id_kategori = k.id_kategori " +
-                "ORDER BY p.nama_produk";
+        String sql = "SELECT p.*, k.nama_kategori, k.deskripsi_kategori " + "FROM tbproduk p LEFT JOIN tbkategori k ON p.id_kategori = k.id_kategori " + "ORDER BY p.nama_produk";
         try {
             Connection conn = Koneksi.getConnection();
             Statement st = conn.createStatement();
@@ -31,9 +29,7 @@ public class ProdukDAO {
     }
 
     public Produk getProdukById(String id) {
-        String sql = "SELECT p.*, k.nama_kategori, k.deskripsi_kategori " +
-                "FROM tbproduk p LEFT JOIN tbkategori k ON p.id_kategori = k.id_kategori " +
-                "WHERE p.id_produk = ?";
+        String sql = "SELECT p.*, k.nama_kategori, k.deskripsi_kategori " + "FROM tbproduk p LEFT JOIN tbkategori k ON p.id_kategori = k.id_kategori " + "WHERE p.id_produk = ?";
         try {
             Connection conn = Koneksi.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -66,8 +62,7 @@ public class ProdukDAO {
     }
 
     public boolean updateProduk(Produk p) {
-        String sql = "UPDATE tbproduk SET nama_produk=?, id_kategori=?, harga_beli=?, " +
-                "harga_jual=?, stok_produk=?, stok_minimum=? WHERE id_produk=?";
+        String sql = "UPDATE tbproduk SET nama_produk=?, id_kategori=?, harga_beli=?, " + "harga_jual=?, stok_produk=?, stok_minimum=? WHERE id_produk=?";
         try {
             Connection conn = Koneksi.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -114,9 +109,7 @@ public class ProdukDAO {
 
     public ArrayList<Produk> getProdukStokMenunipis() {
         ArrayList<Produk> list = new ArrayList<>();
-        String sql = "SELECT p.*, k.nama_kategori, k.deskripsi_kategori " +
-                "FROM tbproduk p LEFT JOIN tbkategori k ON p.id_kategori = k.id_kategori " +
-                "WHERE p.stok_produk <= p.stok_minimum";
+        String sql = "SELECT p.*, k.nama_kategori, k.deskripsi_kategori " + "FROM tbproduk p LEFT JOIN tbkategori k ON p.id_kategori = k.id_kategori " + "WHERE p.stok_produk <= p.stok_minimum";
         try {
             Connection conn = Koneksi.getConnection();
             Statement st = conn.createStatement();
